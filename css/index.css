@@ -1,3 +1,11 @@
+body {
+    padding-top: 100px; 
+ }
+
+ #mainNav {
+    background-color: rgb(254, 72, 31);  
+  }
+
 .mar{
     margin-top: 100px;
     
@@ -7,4 +15,18 @@
 }
 .det{
     border-style: double;
+}
+
+.btn{
+    margin-top: 10px;
+  }
+    .btns{
+      color: white;
+      background-color:Tomato;
+      border: 2px solid #ffffff;
+    }
+
+#picz{
+    width:120px; 
+    height:120px;
 }
