@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="css/index.css">
+  <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+  <!-- <script src="js/index.js"></script> -->
+
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAJIRibfhC67xSdhSJNEgSjah7b1qsEG28",
+      authDomain: "psuproject-e92e0.firebaseapp.com",
+      databaseURL: "https://psuproject-e92e0.firebaseio.com",
+      projectId: "psuproject-e92e0",
+      storageBucket: "psuproject-e92e0.appspot.com",
+      messagingSenderId: "34613977797"
+    };
+    firebase.initializeApp(config);
+    // Initialize Cloud Firestore through Firebase
+    var db = firebase.firestore();
+    // Disable deprecated features
+    db.settings({
+      timestampsInSnapshots: true
+    });
+  </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="home.html">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+              <div class="dropdown-menu" aria-labelledby="dropdownId">
+                <a class="dropdown-item" href="Login.html">คนที่เข้ามาในมอ</a>
+                <a class="dropdown-item" href="Timeout.html">คนที่ออกจากมอ</a>
+              </div>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+<div class="container">
+  <h1>ข้อมูลทุกคนที่เข้าในมอ</h1>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Photo</th>
+            <th>CarCode</th>
+            <th>Color</th>
+            <th>Brand</th>
+            <th>Name</th>
+           <th>Lastname</th>
+            <th>Faculty</th>
+            <th>Marjor</th>
+            <th>PSU_Code</th>
+            <th>PhoneNumber</th>
+            
+          </tr>
+        </thead>
+        <tbody id="TimeIn">
+        </tbody>
+      </table>
+ 
+</div>
+
+
+
+      <script>
+  var detail ="";
+    db.collection("TimeIn").get().then((querySnapshot) => {
+    
+      querySnapshot.docs.forEach(function (item) {
+       
+          //data.push(item)
+         detail +=  "<tr>" 
+          + "<td>" + item.data().pid + "</td>"
+          +"<td>" + item.data().photo + "</td>" 
+          +"<td>" + item.data().carcode + "</td>" 
+          +"<td>" + item.data().color + "</td>" 
+          +"<td>" + item.data().brand + "</td>" 
+          +"<td>" + item.data().name + "</td>" 
+          +"<td>" + item.data().lastname + "</td>" 
+          +"<td>" + item.data().faculty + "</td>" 
+          +"<td>" + item.data().major+ "</td>" 
+          +"<td>" + item.data().psucode + "</td>" 
+          +"<td>" + item.data().phone + "</td>" 
+    document.getElementById("TimeIn").innerHTML = detail;
+    });
+    
+});
+</script>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
