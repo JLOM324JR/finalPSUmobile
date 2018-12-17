@@ -1,14 +1,23 @@
 body {
     padding-top: 100px; 
+    font-family: 'Kanit', sans-serif;
  }
 
- #mainNav {
+ #topindex{
+    background-color: rgb(254, 72, 31); 
+ }
+
+#mainNav {
     background-color: rgb(254, 72, 31);  
   }
 
 .mar{
     margin-top: 100px;
-    
+    text-align: center;
+}
+.mars{
+    text-align: left;
+    margin-bottom: 20px;
 }
 .pad{
     padding-top: 50px;
@@ -16,17 +25,91 @@ body {
 .det{
     border-style: double;
 }
+.tex{
+    text-align: center;
+    margin-bottom: 30px;
+}
 
-.btn{
-    margin-top: 10px;
-  }
+.marlg{
+   margin-left: 1100px;
+}
+
+.chrong{
+    width: 50%;
+    margin-right: 150px;
+    margin-left: 30px;
+
+}
+
     .btns{
       color: white;
       background-color:Tomato;
       border: 2px solid #ffffff;
     }
 
+    .btn-1{
+        color: white;
+        background-color: rgb(14, 125, 250);
+        border-color: rgb(14, 125, 250);
+        font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        text-transform: uppercase;
+        font-weight: 700;
+        border-radius: 3px;
+        font-size: 18px;
+        padding: 20px 40px;
+        
+      }
+      .btn-1:hover{
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+      }
+      .btn-1:focus,
+      .btn-1:active,
+      .btn-1.active,
+      .open .dropdown-toggle.btn-1 {
+        color: white;
+        background-color:  rgb(14, 136, 250);
+        border-color:  rgb(14, 136, 250);
+      }
+
 #picz{
     width:120px; 
     height:120px;
+}
+
+#colortable{
+    background-color:rgb(61, 182, 186);
+}
+
+#headtable{
+    text-align: center;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1.5px solid #016ad3;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: baseline;
+    border-top: 1px solid #dee2e6;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+td, th {
+    display: table-cell;
+    vertical-align: inherit;
 }

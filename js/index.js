@@ -28,7 +28,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         window.location.href = 'home.html';
         // ...
     }
-});
+}); 
 
 
 

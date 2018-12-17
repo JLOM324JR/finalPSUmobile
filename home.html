@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>PsuHome</title>
   <!-- Required meta tags -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +14,9 @@
     crossorigin="anonymous">
 
   <link rel="stylesheet" href="css/index.css">
+
+  <!--FONT!-->
+  <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 
   <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
   <!-- <script src="js/index.js"></script> -->
@@ -31,6 +34,7 @@
     firebase.initializeApp(config);
     // Initialize Cloud Firestore through Firebase
     var db = firebase.firestore();
+
     // Disable deprecated features
     db.settings({
       timestampsInSnapshots: true
@@ -41,7 +45,7 @@
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">PSUSECURITY</a>
     <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -49,68 +53,101 @@
     <div class="collapse navbar-collapse" id="collapsibleNavId">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active">
-          <a class="nav-link" href="home.html">Home
+          <a class="nav-link" href="home.html">หน้าหลัก
             <span class="sr-only">(current)</span>
           </a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+          <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ข้อมูลการเข้า-ออก</a>
           <div class="dropdown-menu" aria-labelledby="dropdownId">
-            <a class="dropdown-item" href="Login.html">คนที่เข้ามาในมอ</a>
-            <a class="dropdown-item" href="Timeout.html">คนที่ออกจากมอ</a>
+            <a class="dropdown-item" href="Timein.html">การเข้า</a>
+            <a class="dropdown-item" href="Timeout.html">การออก</a>
           </div>
 
         </li>
+        <li>
+          <input class="form-control chrong my-2 my-lg-0 mr-sm-2" type="text" id="search" placeholder="ค้นหา" onchange="search(this.value)">
+        </li>
+        <button type="button" class="btn marlg btn-info" onclick="signout()"> ออกจากระบบ </button>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-        <button class="btn btns my-2 my-sm-0" type="submit" id="butseacrh">Search</button>
-      </form>
     </div>
   </nav>
 
 
 
 
-  <div class="container">
-    <h1>ข้อมูลทุกคนที่ลงทะเบียน</h1>
-    <div class="row" style="margin-top :50px;">
-
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Photo</th>
-            <th>CarCode</th>
-            <th>Color</th>
-            <th>Brand</th>
-            <th>Name</th>
-            <th>Lastname</th>
-            <th>Faculty</th>
-            <th>Marjor</th>
-            <th>PSU_Code</th>
-            <th>PhoneNumber</th>
-          </tr>
-        </thead>
-        <tbody id="person">
-        </tbody>
-      </table>
-
-    </div>
+  <div class="container tex">
+    <h1>ข้อมูลรถที่ลงทะเบียน</h1>
   </div>
-
+  <table class="table">
+    <thead id="colortable">
+      <tr id="headtable">
+        <th>ลำดับ</th>
+        <th>รูป</th>
+        <th>ชื่อ</th>
+        <th>นามสกุล</th>
+        <th>รหัสนักศึกษา</th>
+        <th>คณะ</th>
+        <th>สาขา</th>
+        <th>ป้ายทะเบียนรถ</th>
+        <th>สีรถ</th>
+        <th>รุ่น</th>
+        <th>หมายเลยโทรศัพท์</th>
+      </tr>
+    </thead>
+    <tbody id="person">
+    </tbody>
+  </table>
 
 
   <script>
+    var data = [];
     var detail = "";
     db.collection("person").get().then((querySnapshot) => {
-
       querySnapshot.docs.forEach(function (item) {
+        console.log(item);
+        data.push(item)
+        console.log(data);
 
-        //data.push(item)
         detail += "<tr>"
           + "<td>" + item.data().pid + "</td>"
-          + "<td>" +'<img id="picz" src=" '+item.data().photo +'" >'+ "</td>"
+          + "<td>" + '<img id="picz" src=" ' + item.data().photo + '" >' + "</td>"
+          + "<td>" + item.data().name + "</td>"
+          + "<td>" + item.data().lastname + "</td>"
+          + "<td>" + item.data().psucode + "</td>"
+          + "<td>" + item.data().faculty + "</td>"
+          + "<td>" + item.data().major + "</td>"
+          + "<td>" + item.data().carcode + "</td>"
+          + "<td>" + item.data().color + "</td>"
+          + "<td>" + item.data().brand + "</td>"
+          + "<td>" + item.data().phone + "</td>"
+        document.getElementById("person").innerHTML = detail;
+        console.log(item.data().photo);
+      });
+
+    });
+  </script>
+
+  <script>
+    // console.log(search());
+    function search(search) {
+      const filterItems = (needle, heystack) => {
+        let query = needle.toLowerCase();
+        return heystack.filter(item => item.data().carcode.toLowerCase().indexOf(needle) >= 0);
+      }
+      console.log(filterItems(search.toLowerCase(), data));
+
+      var searchbrand = filterItems(search, data);
+      showsearch(searchbrand)
+    }
+    function showsearch(showsearch) {
+      console.log(showsearch);
+      var detail = ''
+      showsearch.forEach(function (item) {
+        console.log(item.data().carcode);
+        detail += "<tr>"
+          + "<td>" + item.data().pid + "</td>"
+          + "<td>" + '<img id="picz" src=" ' + item.data().photo + '" >' + "</td>"
           + "<td>" + item.data().carcode + "</td>"
           + "<td>" + item.data().color + "</td>"
           + "<td>" + item.data().brand + "</td>"
@@ -120,12 +157,24 @@
           + "<td>" + item.data().major + "</td>"
           + "<td>" + item.data().psucode + "</td>"
           + "<td>" + item.data().phone + "</td>"
-        document.getElementById("person").innerHTML = detail;
-        console.log(item.data().photo);
-      });
 
-    });
+
+      }); document.getElementById("person").innerHTML = detail;
+    }
   </script>
+
+  <script>
+    function signout() {
+      firebase.auth().signOut().then(function () {
+        window.location.href = 'Login.html';
+      }).catch(function (error) {
+        // An error happened.
+      });
+    };
+
+  </script>
+
+
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
