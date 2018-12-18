@@ -66,6 +66,9 @@
 
         </li>
         <li>
+          <a class="btn marl btn-warning" href="insert.html" role="button">ลงทะเบียน</a>
+        </li>
+        <li>
           <input class="form-control chrong my-2 my-lg-0 mr-sm-2" type="text" id="search" placeholder="ค้นหา" onchange="search(this.value)">
         </li>
         <button type="button" class="btn marlg btn-info" onclick="signout()"> ออกจากระบบ </button>
@@ -93,6 +96,7 @@
         <th>สีรถ</th>
         <th>รุ่น</th>
         <th>หมายเลยโทรศัพท์</th>
+        <th></th>
       </tr>
     </thead>
     <tbody id="person">
@@ -101,6 +105,7 @@
 
 
   <script>
+    
     var data = [];
     var detail = "";
     db.collection("person").get().then((querySnapshot) => {
@@ -121,14 +126,14 @@
           + "<td>" + item.data().color + "</td>"
           + "<td>" + item.data().brand + "</td>"
           + "<td>" + item.data().phone + "</td>"
+          + "<td>" + '<button type="submit" class="btn btn-danger" onclick="remove('+ item.data().pid +');"> ลบ </button>' + "</td>"
+
         document.getElementById("person").innerHTML = detail;
         console.log(item.data().photo);
       });
 
     });
-  </script>
-
-  <script>
+   
     // console.log(search());
     function search(search) {
       const filterItems = (needle, heystack) => {
@@ -140,6 +145,7 @@
       var searchbrand = filterItems(search, data);
       showsearch(searchbrand)
     }
+
     function showsearch(showsearch) {
       console.log(showsearch);
       var detail = ''
@@ -148,22 +154,22 @@
         detail += "<tr>"
           + "<td>" + item.data().pid + "</td>"
           + "<td>" + '<img id="picz" src=" ' + item.data().photo + '" >' + "</td>"
+          + "<td>" + item.data().name + "</td>"
+          + "<td>" + item.data().lastname + "</td>"
+          + "<td>" + item.data().psucode + "</td>"
+          + "<td>" + item.data().faculty + "</td>"
+          + "<td>" + item.data().major + "</td>"
           + "<td>" + item.data().carcode + "</td>"
           + "<td>" + item.data().color + "</td>"
           + "<td>" + item.data().brand + "</td>"
-          + "<td>" + item.data().name + "</td>"
-          + "<td>" + item.data().lastname + "</td>"
-          + "<td>" + item.data().faculty + "</td>"
-          + "<td>" + item.data().major + "</td>"
-          + "<td>" + item.data().psucode + "</td>"
           + "<td>" + item.data().phone + "</td>"
+          + "<td>" + '<button type="submit" class="btn btn-danger" onclick="remove('+ item.data().pid +');"> ลบ </button>' + "</td>"
 
-
-      }); document.getElementById("person").innerHTML = detail;
+      }); 
+      document.getElementById("person").innerHTML = detail;
     }
-  </script>
+  
 
-  <script>
     function signout() {
       firebase.auth().signOut().then(function () {
         window.location.href = 'Login.html';
@@ -172,8 +178,27 @@
       });
     };
 
+function remove(pid) {
+  console.log("pid:"+pid);
+  db.collection("person").where("pid", "==", pid)
+.get()
+.then(querySnapshot => {
+  querySnapshot.forEach((doc) => {
+    doc.ref.delete().then(() => {
+      console.log("Document successfully deleted!");
+    }).catch(function(error) {
+      console.error("Error removing document: ", error);
+    });
+  });
+})
+.catch(function(error) {
+  console.log("Error getting documents: ", error);
+});
+    }
+ 
+   
+  
   </script>
-
 
 
   <!-- Optional JavaScript -->

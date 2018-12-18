@@ -3,6 +3,10 @@ body {
     font-family: 'Kanit', sans-serif;
  }
 
+#bginsert{
+    background-color: rgb(7, 180, 184,0.2);
+}
+
  #topindex{
     background-color: rgb(254, 72, 31); 
  }
@@ -19,19 +23,22 @@ body {
     text-align: left;
     margin-bottom: 20px;
 }
+.marl{
+    margin-left: 20px;
+}
 .pad{
-    padding-top: 50px;
+    padding-top: 20px;
 }
 .det{
     border-style: double;
 }
 .tex{
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .marlg{
-   margin-left: 1100px;
+   margin-left: 1500px;
 }
 
 .chrong{
@@ -39,6 +46,10 @@ body {
     margin-right: 150px;
     margin-left: 30px;
 
+}
+
+.mart{
+    margin-top: 35px;
 }
 
     .btns{
@@ -70,7 +81,11 @@ body {
         background-color:  rgb(14, 136, 250);
         border-color:  rgb(14, 136, 250);
       }
-
+      .btn-warning {
+        color: #424242;
+        background-color: #ffc107;
+        border-color: #ffc107;
+    }
 #picz{
     width:120px; 
     height:120px;
@@ -103,6 +118,7 @@ body {
     padding: .75rem;
     vertical-align: baseline;
     border-top: 1px solid #dee2e6;
+    text-align: center;
 }
 
 *, ::after, ::before {
@@ -112,4 +128,31 @@ body {
 td, th {
     display: table-cell;
     vertical-align: inherit;
+}
+
+ .custom-select-lg {
+    height: calc(2.875rem + 2px);
+    padding-top: .375rem;
+    padding-bottom: .375rem;
+    font-size: 125%;
+}  
+
+.custom-control-label::before, .custom-file-label, .custom-select {
+    transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.custom-select {
+    display: inline-block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem 1.75rem .375rem .75rem;
+    line-height: 1.5;
+    color: #495057;
+    vertical-align: middle;
+    background-size: 8px 10px;
+    border: 1.5px solid #016ad3;
+    border-radius: .25rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
